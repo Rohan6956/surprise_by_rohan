@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>You want to see it?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Font for Stylish Heading -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      background-color: black;
+      color: white;
+      overflow: hidden;
+    }
+
+    .center {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    /* Stylish Heading */
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      margin-bottom: 2.5rem;
+      color: #ffffff;
+      letter-spacing: 1.5px;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+      animation: fadeTitle 2s ease;
+    }
+
+    @keyframes fadeTitle {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .button {
+      background: white;
+      color: black;
+      border: none;
+      padding: 1rem 2rem;
+      margin: 1rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: floatButton 2s ease-in-out infinite;
+      width: 90%;
+      max-width: 300px;
+    }
+
+    .button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.4);
+    }
+
+    @keyframes floatButton {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+      100% { transform: translateY(0); }
+    }
+
+    .media-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: black;
+      height: 100vh;
+      padding: 10px;
+      animation: fadeIn 1s ease;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    video, img {
+      max-width: 100%;
+      max-height: 80vh;
+      margin-bottom: 1rem;
+    }
+
+    .back-button {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      background: white;
+      color: black;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .button {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+        margin: 0.8rem;
+      }
+
+      .back-button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- First Page -->
+  <div class="center" id="first-page">
+    <h1>You want to see it.....?</h1>
+    <button class="button" onclick="showVideo()">Yes, I am brave</button>
+    <button class="button" onclick="showImage()">No, I am gay</button>
+  </div>
+
+  <!-- Video Page -->
+  <div class="media-container hidden" id="video-page">
+    <video id="brave-video" src="viso.mp4" controls></video>
+    <button class="back-button" onclick="goBack()">⬅ Back</button>
+  </div>
+
+  <!-- Image Page -->
+  <div class="media-container hidden" id="image-page">
+    <img src="image.jpg" alt="Image">
+    <button class="back-button" onclick="goBack()">⬅ Back</button>
+  </div>
+
+  <script>
+    function showVideo() {
+      document.getElementById("first-page").classList.add("hidden");
+      document.getElementById("video-page").classList.remove("hidden");
+
+      const video = document.getElementById("brave-video");
+      video.currentTime = 0;
+      video.play().catch(error => {
+        console.log("Autoplay error:", error);
+      });
+    }
+
+    function showImage() {
+      document.getElementById("first-page").classList.add("hidden");
+      document.getElementById("image-page").classList.remove("hidden");
+    }
+
+    function goBack() {
+      document.getElementById("video-page").classList.add("hidden");
+      document.getElementById("image-page").classList.add("hidden");
+      document.getElementById("first-page").classList.remove("hidden");
+
+      // Pause video when going back
+      const video = document.getElementById("brave-video");
+      video.pause();
+    }
+  </script>
+</body>
+</html>
