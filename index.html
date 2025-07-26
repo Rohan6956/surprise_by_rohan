@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <title>You want to see it?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <!-- Google Font for Stylish Heading -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-  
+
   <style>
     * {
       margin: 0;
@@ -77,6 +77,7 @@
     }
 
     .media-container {
+      position: relative; /* Needed for back-button absolute positioning */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -98,6 +99,10 @@
     }
 
     .back-button {
+      position: absolute;
+      bottom: 40px; /* Moves it up from the bottom */
+      left: 50%;
+      transform: translateX(-50%);
       background: transparent;
       color: white;
       border: 2px solid white;
@@ -105,8 +110,8 @@
       border-radius: 8px;
       font-size: 1rem;
       cursor: pointer;
-      margin-top: 20px; /* 👈 Moved up */
       transition: all 0.3s ease;
+      z-index: 10;
     }
 
     .back-button:hover {
@@ -133,7 +138,6 @@
       .back-button {
         font-size: 0.9rem;
         padding: 0.5rem 1rem;
-        margin-top: 15px;
       }
     }
   </style>
@@ -181,6 +185,7 @@
       document.getElementById("image-page").classList.add("hidden");
       document.getElementById("first-page").classList.remove("hidden");
 
+      // Pause video when going back
       const video = document.getElementById("brave-video");
       video.pause();
     }
